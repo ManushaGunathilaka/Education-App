@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
     //onAuthStateChange
 
     setTimeout(() => {
-      setIsAuthonticated(false);
+      setIsAuthonticated(true);
     }, 3000);
   }, []);
 
