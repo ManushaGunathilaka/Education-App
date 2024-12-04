@@ -16,7 +16,9 @@ const MainLayOut = () => {
     //check if user is authonticated or not
 
     if (typeof isAuthonticated == "undefined") return;
+
     const inApp = segments[0] == "(app)";
+
     if (isAuthonticated && !inApp) {
       //redirect to home
       router.replace("home");
