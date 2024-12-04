@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 
@@ -10,6 +11,10 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     //onAuthStateChange
+
+    setTimeout(() => {
+      setIsAuthonticated(false);
+    }, 3000);
   }, []);
 
   const login = async (email, password) => {
@@ -34,4 +39,13 @@ export const AuthContextProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const useAuth = () => {
+  const value = useContext(AuthContext);
+
+  if (!value) {
+    throw new Error("useAuth must be wrapped inside AuthContext Provider");
+  }
+  return value;
 };
