@@ -7,7 +7,7 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import {
   widthPercentageToDP as wp,
@@ -16,15 +16,20 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { Feather, Octicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import Lodin from "../components/Lodin";
 
 export default function SignIn() {
   //useRouter hook from expo
   const router = useRouter();
 
+  //state for loading
+  const [loading, setLoding] = useState(false);
+
+  //hold inputs
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!emailRef.current || !passwordRef.current) {
       Alert.alert("Sign In", "Please fill all the feilds!");
       return;
@@ -94,20 +99,29 @@ export default function SignIn() {
                 Forgot Password?
               </Text>
             </View>
+
             {/* submit button */}
 
-            <TouchableOpacity
-              onPress={handleLogin}
-              style={{ height: hp(6.5) }}
-              className="bg-indigo-500 rounded-xl justify-center items-center"
-            >
-              <Text
-                style={{ fontSize: hp(2.7) }}
-                className="text-white font-bold tracking-wider"
-              >
-                Sign In
-              </Text>
-            </TouchableOpacity>
+            <View>
+              {loading ? (
+                <View className="flex-row justify-center">
+                  <Lodin size={hp(8)} />
+                </View>
+              ) : (
+                <TouchableOpacity
+                  onPress={handleLogin}
+                  style={{ height: hp(6.5) }}
+                  className="bg-indigo-500 rounded-xl justify-center items-center"
+                >
+                  <Text
+                    style={{ fontSize: hp(2.7) }}
+                    className="text-white font-bold tracking-wider"
+                  >
+                    Sign In
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </View>
 
             {/* sign up text */}
             <View className="flex-row justify-center">
