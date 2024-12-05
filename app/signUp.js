@@ -17,6 +17,7 @@ import { StatusBar } from "expo-status-bar";
 import { Feather, Octicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Lodin from "../components/Lodin";
+import CustomKeyboardView from "../components/CustomKeyboardView";
 
 export default function SignUp() {
   //useRouter hook from expo
@@ -46,7 +47,7 @@ export default function SignUp() {
   };
 
   return (
-    <View className="flex-1">
+    <CustomKeyboardView>
       <StatusBar style="dark" />
 
       <View
@@ -170,6 +171,6 @@ export default function SignUp() {
           </View>
         </View>
       </View>
-    </View>
+    </CustomKeyboardView>
   );
 }
