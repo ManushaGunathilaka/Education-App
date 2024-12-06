@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import React, { useEffect } from "react";
 import { Slot, useRouter, useSegments } from "expo-router";
+import { MenuProvider } from "react-native-popup-menu";
 
 // Import your global CSS file
 import "../global.css";
@@ -33,8 +34,10 @@ const MainLayOut = () => {
 };
 export default function RootLayout() {
   return (
-    <AuthContextProvider>
-      <MainLayOut />
-    </AuthContextProvider>
+    <MenuProvider>
+      <AuthContextProvider>
+        <MainLayOut />
+      </AuthContextProvider>
+    </MenuProvider>
   );
 }
