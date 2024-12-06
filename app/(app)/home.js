@@ -14,7 +14,7 @@ import { useClick } from "../../context/ClickContext";
 export default function Home() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { clickCount } = useClick();
+  const { clickCount, favorites } = useClick();
 
   useEffect(() => {
     fetchCourses();
@@ -59,9 +59,9 @@ export default function Home() {
         <CourseList courses={courses} />
       )}
 
-      {/* Floating Button */}
+      {/* Floating Button - Clicks: {clickCount} |*/}
       <TouchableOpacity style={styles.floatingButton}>
-        <Text style={styles.buttonText}>{`Clicks: ${clickCount}`}</Text>
+        <Text style={styles.buttonText}>Favorites: {favorites.length}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     right: 20,
     backgroundColor: "#007BFF",
     borderRadius: 30,
-    width: 60,
+    width: 120,
     height: 60,
     justifyContent: "center",
     alignItems: "center",
@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
+    textAlign: "center",
   },
 });

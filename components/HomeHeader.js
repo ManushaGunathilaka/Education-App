@@ -34,7 +34,7 @@ export default function HomeHeader() {
     >
       <View>
         <Text style={{ fontSize: hp(3) }} className="font-medium text-white">
-          Chats
+          {user?.username}
         </Text>
       </View>
       <View>

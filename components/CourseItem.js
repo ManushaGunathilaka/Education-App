@@ -1,9 +1,12 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import { useClick } from "../context/ClickContext";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function CourseItem({ course }) {
-  const { incrementCount } = useClick();
+  const { incrementCount, favorites, toggleFavorite } = useClick();
+
+  const isFavorite = favorites.includes(course.id);
 
   return (
     <TouchableOpacity style={styles.container} onPress={incrementCount}>
@@ -14,6 +17,13 @@ export default function CourseItem({ course }) {
         <Text style={styles.description}>{course.description}</Text>
         <Text style={styles.students}>{course.students} students enrolled</Text>
       </View>
+      <TouchableOpacity onPress={() => toggleFavorite(course.id)}>
+        <FontAwesome
+          name={isFavorite ? "heart" : "heart-o"}
+          size={24}
+          color={isFavorite ? "red" : "gray"}
+        />
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 }
