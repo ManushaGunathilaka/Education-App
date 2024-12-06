@@ -18,10 +18,13 @@ import { Feather, Octicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Lodin from "../components/Lodin";
 import CustomKeyboardView from "../components/CustomKeyboardView";
+import { useAuth } from "../context/authContext";
 
 export default function SignUp() {
   //useRouter hook from expo
   const router = useRouter();
+
+  const { register } = useAuth();
 
   //state for loading
   const [loading, setLoding] = useState(false);
@@ -42,8 +45,20 @@ export default function SignUp() {
       Alert.alert("Sign Un", "Please fill all the feilds!");
       return;
     }
-
     //register process
+    setLoding(true);
+
+    let response = await register(
+      emailRef.current,
+      passwordRef.current,
+      usernameRef.current,
+      profileRef.current
+    );
+    setLoding(false);
+    console.log("got result:", response);
+    if (!response.success) {
+      Alert.alert("Sign Up", response.msg);
+    }
   };
 
   return (

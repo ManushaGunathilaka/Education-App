@@ -18,6 +18,7 @@ import { Feather, Octicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Lodin from "../components/Lodin";
 import CustomKeyboardView from "../components/CustomKeyboardView";
+import { useAuth } from "../context/authContext";
 
 export default function SignIn() {
   //useRouter hook from expo
@@ -25,6 +26,8 @@ export default function SignIn() {
 
   //state for loading
   const [loading, setLoding] = useState(false);
+
+  const { login } = useAuth();
 
   //hold inputs
   const emailRef = useRef("");
@@ -35,8 +38,14 @@ export default function SignIn() {
       Alert.alert("Sign In", "Please fill all the feilds!");
       return;
     }
-
     //login process
+    setLoding(true);
+    const response = await login(emailRef.current, passwordRef.current);
+    setLoding(false);
+    console.log("sign in response:", response);
+    if (!response.success) {
+      Alert.alert("Sign In", response.msg);
+    }
   };
 
   return (
