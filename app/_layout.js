@@ -6,6 +6,7 @@ import { MenuProvider } from "react-native-popup-menu";
 // Import your global CSS file
 import "../global.css";
 import { AuthContextProvider, useAuth } from "../context/authContext";
+import { ClickProvider } from "../context/ClickContext";
 
 const MainLayOut = () => {
   //hooks
@@ -34,10 +35,12 @@ const MainLayOut = () => {
 };
 export default function RootLayout() {
   return (
-    <MenuProvider>
-      <AuthContextProvider>
-        <MainLayOut />
-      </AuthContextProvider>
-    </MenuProvider>
+    <ClickProvider>
+      <MenuProvider>
+        <AuthContextProvider>
+          <MainLayOut />
+        </AuthContextProvider>
+      </MenuProvider>
+    </ClickProvider>
   );
 }

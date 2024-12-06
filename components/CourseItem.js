@@ -1,9 +1,12 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
+import { useClick } from "../context/ClickContext";
 
 export default function CourseItem({ course }) {
+  const { incrementCount } = useClick();
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={incrementCount}>
       <Image source={{ uri: course.image }} style={styles.image} />
       <View style={styles.details}>
         <Text style={styles.title}>{course.title}</Text>
